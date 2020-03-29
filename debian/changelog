@@ -1,3 +1,12 @@
+novena-usb-hub (1.4-r2) unstable; urgency=medium
+
+  * novena-usb-hub: Set libusb log level property
+  * debian: Add libusb dependency
+  * debian: Set myself as the maintainer
+  * debian: Bump source/format to 3.0
+
+ -- Jookia <contact@jookia.org>  Sun, 29 Mar 2020 19:40:28 +1100
+
 novena-usb-hub (1.4-r1) unstable; urgency=medium
 
   * Add udev rule to disable usb powersave
