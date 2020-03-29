@@ -387,6 +387,7 @@ static int novena_hub_init(struct state *st) {
 		return ret;
 
 	libusb_set_debug(st->ctx, 3);
+	libusb_set_option(st->ctx, LIBUSB_OPTION_LOG_LEVEL, 3);
 
 	return ret;
 }
