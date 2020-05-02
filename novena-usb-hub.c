@@ -183,21 +183,16 @@ static int set_port_power(struct state *st,
 				struct libusb_device *hub_dev,
 				int port,
 				int enabled) {
-	int feature = USB_PORT_FEAT_POWER;
 	int request;
-	int index;
 
 	int ret;
 	struct libusb_device_handle *hub = NULL;
 
 	if (enabled) {
 		request = LIBUSB_REQUEST_SET_FEATURE;
-		index = port;
 	}
 	else {
 		request = LIBUSB_REQUEST_CLEAR_FEATURE;
-		feature = USB_PORT_FEAT_POWER;
-		index = port;
 	}
 
 	ret = libusb_open(hub_dev, &hub);
@@ -207,7 +202,7 @@ static int set_port_power(struct state *st,
 	}
 
 	ret = libusb_control_transfer(hub, USB_RT_PORT,
-					request, feature, index,
+					request, USB_PORT_FEAT_POWER, port,
 					NULL, 0, CTRL_TIMEOUT);
 
 	if (ret) {
@@ -432,11 +427,13 @@ int main(int argc, char * const *argv) {
 
 			case 'e':
 				port_enable(&st, optarg);
+				printf("Enabling\n");
 				action_taken = 1;
 				break;
 
 			case 'd':
 				port_disable(&st, optarg);
+				printf("Disabling\n");
 				action_taken = 1;
 				break;
 
