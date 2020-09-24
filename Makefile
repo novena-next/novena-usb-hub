@@ -1,5 +1,7 @@
-CFLAGS  += `pkg-config libusb-1.0 --cflags --libs` -Wall -g $(shell dpkg-buildflags --get CFLAGS)
-LDFLAGS += `pkg-config libusb-1.0 --libs` -g $(shell dpkg-buildflags --get LDFLAGS)
+PKGCONFIG ?= pkg-config
+
+CFLAGS  += `$(PKGCONFIG) libusb-1.0 --cflags --libs` -Wall -g $(shell dpkg-buildflags --get CFLAGS)
+LDFLAGS += `$(PKGCONFIG) libusb-1.0 --libs` -g $(shell dpkg-buildflags --get LDFLAGS)
 
 DESTDIR ?=
 PREFIX  ?= /usr/lib
